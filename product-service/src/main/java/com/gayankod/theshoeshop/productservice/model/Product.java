@@ -1,4 +1,4 @@
-package com.gayankod.productservice.model;
+package com.gayankod.theshoeshop.productservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

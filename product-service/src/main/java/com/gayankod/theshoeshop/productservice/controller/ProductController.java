@@ -1,8 +1,8 @@
-package com.gayankod.productservice.controller;
+package com.gayankod.theshoeshop.productservice.controller;
 
-import com.gayankod.productservice.dto.ProductRequest;
-import com.gayankod.productservice.dto.ProductResponse;
-import com.gayankod.productservice.service.ProductService;
+import com.gayankod.theshoeshop.productservice.dto.ProductRequest;
+import com.gayankod.theshoeshop.productservice.dto.ProductResponse;
+import com.gayankod.theshoeshop.productservice.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +15,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

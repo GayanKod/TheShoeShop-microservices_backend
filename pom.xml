@@ -11,7 +11,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.gayankod</groupId>
+    <groupId>com.gayankod.theshoeshop</groupId>
     <artifactId>TheShoeShop-microservices_backend</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>

@@ -1,9 +1,9 @@
-package com.gayankod.productservice.service;
+package com.gayankod.theshoeshop.productservice.service;
 
-import com.gayankod.productservice.dto.ProductRequest;
-import com.gayankod.productservice.dto.ProductResponse;
-import com.gayankod.productservice.model.Product;
-import com.gayankod.productservice.repository.ProductRepository;
+import com.gayankod.theshoeshop.productservice.dto.ProductRequest;
+import com.gayankod.theshoeshop.productservice.dto.ProductResponse;
+import com.gayankod.theshoeshop.productservice.model.Product;
+import com.gayankod.theshoeshop.productservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
