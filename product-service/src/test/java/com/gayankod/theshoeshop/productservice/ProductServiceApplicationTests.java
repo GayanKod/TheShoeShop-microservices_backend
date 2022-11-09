@@ -30,9 +30,11 @@ class ProductServiceApplicationTests {
 	//and then after starting the container it will set the replica url
 	//and added spring.data.mongodb.uri property dynamically at the time of creating the test
 	@Autowired
-	private ObjectMapper objMapper;
-	@Autowired
 	private MockMvc mockMvc;
+//	@Autowired
+//	private ObjectMapper objMapper;
+	ObjectMapper objMapper = new ObjectMapper();
+
 	@DynamicPropertySource
 	static void setProperties(DynamicPropertyRegistry dynamicPropertyRegistry){
 		dynamicPropertyRegistry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
