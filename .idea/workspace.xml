@@ -8,8 +8,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79813969-8162-44eb-a0e8-473a15249255" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/order-service/src/main/java/com/gayankod/theshoeshop/orderservice/model/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/order-service/src/main/java/com/gayankod/theshoeshop/orderservice/model/OrderLineItems.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -156,7 +154,7 @@
       <workItem from="1667849836442" duration="2992000" />
       <workItem from="1667978532410" duration="16738000" />
       <workItem from="1667998633314" duration="5566000" />
-      <workItem from="1668023134162" duration="2454000" />
+      <workItem from="1668023134162" duration="3059000" />
     </task>
     <servers />
   </component>
