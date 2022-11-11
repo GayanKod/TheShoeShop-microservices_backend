@@ -1,5 +1,6 @@
 package com.gayankod.theshoeshop.orderservice.service;
 
+import com.gayankod.theshoeshop.orderservice.dto.InventoryResponse;
 import com.gayankod.theshoeshop.orderservice.dto.OrderLineItemsDTO;
 import com.gayankod.theshoeshop.orderservice.dto.OrderRequest;
 import com.gayankod.theshoeshop.orderservice.model.Order;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,17 +37,19 @@ public class OrderService {
         List<String> skuCodes = order.getOrderLineItemsList().stream().map(OrderLineItems::getSkuCode).toList();
 
 //        Calling Inventory Service to check the product is in stock and place the order
-        Boolean callInventoryResult = webClient.get()
+        InventoryResponse[] callInventoryResults = webClient.get()
                 .uri("http://localhost:8082/api/inventory",
                         uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                         .retrieve()
-                                .bodyToMono(Boolean.class)
+                                .bodyToMono(InventoryResponse[].class)
                                         .block();
 
-        if(callInventoryResult){
+        boolean isProductsInStock = Arrays.stream(callInventoryResults).allMatch(inventoryResponse -> inventoryResponse.isInStock());
+
+        if(isProductsInStock){
             orderRepository.save(order);
         }else {
-            throw new IllegalArgumentException("Product is out of stock");
+            throw new IllegalArgumentException("Products are out of stock");
         }
 
         orderRepository.save(order);

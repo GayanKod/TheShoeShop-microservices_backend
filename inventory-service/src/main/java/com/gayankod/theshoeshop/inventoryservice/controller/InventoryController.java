@@ -15,6 +15,8 @@ public class InventoryController {
 
     private final InventoryService inventoryService;
 
+    // http://localhost:8082/api/inventory?skuCode=Nike_W&skuCode=Nike_Blk
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<InventoryResponse> isInStock(@RequestParam List<String> skuCode){

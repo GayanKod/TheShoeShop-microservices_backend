@@ -8,6 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79813969-8162-44eb-a0e8-473a15249255" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/order-service/src/main/java/com/gayankod/theshoeshop/orderservice/dto/InventoryResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/gayankod/theshoeshop/inventoryservice/controller/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/gayankod/theshoeshop/inventoryservice/controller/InventoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/gayankod/theshoeshop/orderservice/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/gayankod/theshoeshop/orderservice/service/OrderService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,6 +75,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Net Prog Mid Assignment\TheShoeShop-microservices_backend\order-service" />
       <recent name="D:\Net Prog Mid Assignment\TheShoeShop-microservices_backend\product-service" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.gayankod.theshoeshop.orderservice.dto" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -188,7 +194,7 @@
       <workItem from="1667998633314" duration="5566000" />
       <workItem from="1668023134162" duration="3059000" />
       <workItem from="1668165410807" duration="1008000" />
-      <workItem from="1668194083747" duration="1563000" />
+      <workItem from="1668194083747" duration="2299000" />
     </task>
     <servers />
   </component>
