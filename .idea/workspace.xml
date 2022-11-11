@@ -65,7 +65,7 @@
     "jdk.selected.JAVA_MODULE": "17",
     "last_opened_file_path": "D:/Net Prog Mid Assignment/TheShoeShop-microservices_backend/order-service",
     "nodejs_package_manager_path": "npm",
-    "spring.configuration.checksum": "1e0d1127176b9230f18f4c3af22bcb7d"
+    "spring.configuration.checksum": "904007f30c91d976a483718bee68de16"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -155,6 +155,7 @@
       <workItem from="1667978532410" duration="16738000" />
       <workItem from="1667998633314" duration="5566000" />
       <workItem from="1668023134162" duration="3059000" />
+      <workItem from="1668165410807" duration="1008000" />
     </task>
     <servers />
   </component>
