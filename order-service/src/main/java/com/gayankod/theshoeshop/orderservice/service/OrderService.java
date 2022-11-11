@@ -51,8 +51,6 @@ public class OrderService {
         }else {
             throw new IllegalArgumentException("Products are out of stock");
         }
-
-        orderRepository.save(order);
     }
 
     private OrderLineItems mapToDTO(OrderLineItemsDTO orderLineItemsDTO) {
