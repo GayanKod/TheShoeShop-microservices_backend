@@ -9,7 +9,9 @@
   <component name="ChangeListManager">
     <list default="true" id="79813969-8162-44eb-a0e8-473a15249255" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/gayankod/theshoeshop/orderservice/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/gayankod/theshoeshop/orderservice/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/gayankod/theshoeshop/orderservice/dto/OrderLineItemsDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/gayankod/theshoeshop/orderservice/dto/OrderLineItemsDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/gayankod/theshoeshop/orderservice/model/OrderLineItems.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/gayankod/theshoeshop/orderservice/model/OrderLineItems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/order-service/src/main/java/com/gayankod/theshoeshop/orderservice/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/order-service/src/main/java/com/gayankod/theshoeshop/orderservice/service/OrderService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,7 +160,7 @@
       <workItem from="1668023134162" duration="2454000" />
       <workItem from="1668114032948" duration="2916000" />
       <workItem from="1668119065954" duration="6000" />
-      <workItem from="1668154503247" duration="3004000" />
+      <workItem from="1668154503247" duration="4957000" />
     </task>
     <servers />
   </component>
