@@ -8,9 +8,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79813969-8162-44eb-a0e8-473a15249255" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/api-gateway/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-gateway/Dockerfile.layered" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notification-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +76,10 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Net Prog Mid Assignment\TheShoeShop-microservices_backend\order-service" />
       <recent name="D:\Net Prog Mid Assignment\TheShoeShop-microservices_backend\product-service" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\TheShoeShop-microservices_backend\api-gateway" />
+      <recent name="E:\TheShoeShop-microservices_backend\api-gateway\layeredDocker" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.gayankod.theshoeshop.notificationservice" />
@@ -229,7 +232,7 @@
       <workItem from="1667998633314" duration="5566000" />
       <workItem from="1668023134162" duration="3059000" />
       <workItem from="1668165410807" duration="1008000" />
-      <workItem from="1668194083747" duration="23732000" />
+      <workItem from="1668194083747" duration="26662000" />
     </task>
     <servers />
   </component>
