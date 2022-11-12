@@ -22,7 +22,7 @@ import java.util.UUID;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
 
     public void placeOrder(OrderRequest orderRequest){
         Order order = new Order();
@@ -37,12 +37,12 @@ public class OrderService {
         List<String> skuCodes = order.getOrderLineItemsList().stream().map(OrderLineItems::getSkuCode).toList();
 
 //        Calling Inventory Service to check the product is in stock and place the order
-        InventoryResponse[] callInventoryResults = webClient.get()
-                .uri("http://localhost:8082/api/inventory",
+        InventoryResponse[] callInventoryResults = webClientBuilder.build().get()
+                .uri("http://inventory-service/api/inventory",
                         uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                         .retrieve()
-                                .bodyToMono(InventoryResponse[].class)
-                                        .block();
+                        .bodyToMono(InventoryResponse[].class)
+                        .block();
 
         boolean isProductsInStock = Arrays.stream(callInventoryResults).allMatch(inventoryResponse -> inventoryResponse.isInStock());
 
