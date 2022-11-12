@@ -16,10 +16,14 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @CircuitBreaker(name="inventory")
+    @CircuitBreaker(name="inventory", fallbackMethod = "fallbackMethod")
     public String placeOrder(@RequestBody OrderRequest orderRequest){
         orderService.placeOrder(orderRequest);
         return "Order Placed Successfully";
+    }
+
+    public String fallbackMethod(OrderRequest orderRequest, RuntimeException runtimeException){
+        return "Oops! Something went wrong, please try again later";
     }
 
 }
