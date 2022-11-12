@@ -3,11 +3,14 @@ package com.gayankod.theshoeshop.orderservice.service;
 import com.gayankod.theshoeshop.orderservice.dto.InventoryResponse;
 import com.gayankod.theshoeshop.orderservice.dto.OrderLineItemsDTO;
 import com.gayankod.theshoeshop.orderservice.dto.OrderRequest;
+import com.gayankod.theshoeshop.orderservice.event.OrderPlacedEvent;
 import com.gayankod.theshoeshop.orderservice.model.Order;
 import com.gayankod.theshoeshop.orderservice.model.OrderLineItems;
 import com.gayankod.theshoeshop.orderservice.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.weaver.ast.Or;
+import org.springframework.kafka.core.KafkaAdmin;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -23,6 +26,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
+    private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
 
     public String placeOrder(OrderRequest orderRequest){
         Order order = new Order();
@@ -48,6 +52,7 @@ public class OrderService {
 
         if(isProductsInStock){
             orderRepository.save(order);
+            kafkaTemplate.send("notification", new OrderPlacedEvent(order.getOrderNumber()));
             return "Order placed Successfully";
         }else {
             throw new IllegalArgumentException("Products are out of stock");
