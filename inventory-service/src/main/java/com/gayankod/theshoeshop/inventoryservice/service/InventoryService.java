@@ -1,6 +1,7 @@
 package com.gayankod.theshoeshop.inventoryservice.service;
 
 import com.gayankod.theshoeshop.inventoryservice.dto.InventoryResponse;
+import com.gayankod.theshoeshop.inventoryservice.model.Inventory;
 import com.gayankod.theshoeshop.inventoryservice.repository.InventoryRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,14 @@ import java.util.List;
 public class InventoryService {
 
     private final InventoryRepository inventoryRepository;
+
+    public void createInventory(Inventory inventory) {
+        Inventory inventorydb = new Inventory();
+        inventorydb.setSkuCode(inventory.getSkuCode());
+        inventorydb.setQty(inventory.getQty());
+        inventoryRepository.save(inventorydb);
+        log.info("Inventory {} is saved", inventorydb.getId());
+    }
 
     @Transactional(readOnly = true)
     public  List<InventoryResponse> isInStock(List<String> skuCode){
