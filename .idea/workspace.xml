@@ -8,8 +8,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79813969-8162-44eb-a0e8-473a15249255" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/discovery-server/Dockerfile.layered" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inventory-service/Dockerfile.layered" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/notification-service/Dockerfile.layered" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-service/Dockerfile.layered" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/product-service/Dockerfile.layered" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,28 +58,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Net Prog Mid Assignment/TheShoeShop-microservices_backend/order-service&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;7618c35edfe0eef8a4c7272b27c69730&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "E:/TheShoeShop-microservices_backend/product-service",
+    "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "7618c35edfe0eef8a4c7272b27c69730"
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Net Prog Mid Assignment\TheShoeShop-microservices_backend\order-service" />
-      <recent name="D:\Net Prog Mid Assignment\TheShoeShop-microservices_backend\product-service" />
+      <recent name="E:\TheShoeShop-microservices_backend\product-service" />
+      <recent name="E:\TheShoeShop-microservices_backend\order-service" />
+      <recent name="E:\TheShoeShop-microservices_backend\notification-service" />
+      <recent name="E:\TheShoeShop-microservices_backend\inventory-service" />
+      <recent name="E:\TheShoeShop-microservices_backend\discovery-server" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\TheShoeShop-microservices_backend\api-gateway" />
