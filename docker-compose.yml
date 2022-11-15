@@ -7,8 +7,8 @@ services:
     image: postgres
     environment:
       POSTGRES_DB: TSS_OrderService
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: 12345678
+      POSTGRES_USER: ptechie
+      POSTGRES_PASSWORD: password
       PGDATA: /data/postgres
     volumes:
       - ./postgres-order:/data/postgres
@@ -24,8 +24,8 @@ services:
     image: postgres
     environment:
       POSTGRES_DB: TSS_InventoryService
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: 12345678
+      POSTGRES_USER: ptechie
+      POSTGRES_PASSWORD: password
       PGDATA: /data/postgres
     volumes:
       - ./postgres-inventory:/data/postgres
@@ -44,7 +44,6 @@ services:
       - "27017"
     volumes:
       - ./mongo-data:/data/db
-
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.1
@@ -113,6 +112,7 @@ services:
     depends_on:
       - mongo
       - discovery-server
+      - api-gateway
 
   ## Order-Service Docker Compose Config
   order-service:
@@ -121,12 +121,13 @@ services:
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://theshoeshoporderservicedb.c5mitriv1zpn.us-east-1.rds.amazonaws.com:3306/TSS_OrderService
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-order:5431/TSS_OrderService
     depends_on:
       - postgres-order
       - broker
       - zipkin
       - discovery-server
+      - api-gateway
 
   ## Inventory-Service Docker Compose Config
   inventory-service:
@@ -135,10 +136,11 @@ services:
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:theshoeshopinventoryservicedb.c5mitriv1zpn.us-east-1.rds.amazonaws.com:3306/TSS_InventoryService
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-inventory:5432/TSS_InventoryService
     depends_on:
       - postgres-inventory
       - discovery-server
+      - api-gateway
 
   ## Notification-Service Docker Compose Config
   notification-service:
@@ -151,32 +153,4 @@ services:
       - zipkin
       - broker
       - discovery-server
-
-#  ## Prometheus
-#  prometheus:
-#    image: prom/prometheus:v2.37.1
-#    container_name: prometheus
-#    restart: unless-stopped
-#    ports:
-#      - "9090:9090"
-#    volumes:
-#      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-#    depends_on:
-#      - product-service
-#      - inventory-service
-#      - order-service
-#      - notification-service
-#
-#  grafana:
-#    image: grafana/grafana-oss:8.5.2
-#    container_name: grafana
-#    restart: unless-stopped
-#    ports:
-#      - "3000:3000"
-#    links:
-#      - prometheus:prometheus
-#    volumes:
-#      - ./grafana:/var/lib/grafana
-#    environment:
-#      - GF_SECURITY_ADMIN_USER=admin
-#      - GF_SECURITY_ADMIN_PASSWORD=password
+      - api-gateway
