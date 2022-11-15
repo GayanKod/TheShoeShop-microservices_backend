@@ -1,37 +1,37 @@
 ---
 version: '3'
 services:
-  ## MySQL Docker Compose Config
-  postgres-order:
-    container_name: postgres-order
-    image: postgres
-    environment:
-      POSTGRES_DB: TSS_OrderService
-      POSTGRES_USER: ptechie
-      POSTGRES_PASSWORD: password
-      PGDATA: /data/postgres
-    volumes:
-      - ./postgres-order:/data/postgres
-    expose:
-      - "5431"
-    ports:
-      - "5431:5431"
-    command: -p 5431
-    restart: unless-stopped
+#  ## MySQL Docker Compose Config
+#  postgres-order:
+#    container_name: postgres-order
+#    image: postgres
+#    environment:
+#      POSTGRES_DB: TSS_OrderService
+#      POSTGRES_USER: ptechie
+#      POSTGRES_PASSWORD: password
+#      PGDATA: /data/postgres
+#    volumes:
+#      - ./postgres-order:/data/postgres
+#    expose:
+#      - "5431"
+#    ports:
+#      - "5431:5431"
+#    command: -p 5431
+#    restart: unless-stopped
 
-  postgres-inventory:
-    container_name: postgres-inventory
-    image: postgres
-    environment:
-      POSTGRES_DB: TSS_InventoryService
-      POSTGRES_USER: ptechie
-      POSTGRES_PASSWORD: password
-      PGDATA: /data/postgres
-    volumes:
-      - ./postgres-inventory:/data/postgres
-    ports:
-      - "5432:5432"
-    restart: unless-stopped
+#  postgres-inventory:
+#    container_name: postgres-inventory
+#    image: postgres
+#    environment:
+#      POSTGRES_DB: TSS_InventoryService
+#      POSTGRES_USER: ptechie
+#      POSTGRES_PASSWORD: password
+#      PGDATA: /data/postgres
+#    volumes:
+#      - ./postgres-inventory:/data/postgres
+#    ports:
+#      - "5432:5432"
+#    restart: unless-stopped
 
   ## Mongo Docker Compose Config
   mongo:
@@ -115,32 +115,58 @@ services:
       - api-gateway
 
   ## Order-Service Docker Compose Config
+#  order-service:
+#    container_name: order-service
+#    image: gayankod/order-service:latest
+#    pull_policy: always
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-order:5431/TSS_OrderService
+#    depends_on:
+#      - postgres-order
+#      - broker
+#      - zipkin
+#      - discovery-server
+#      - api-gateway
+
   order-service:
     container_name: order-service
     image: gayankod/order-service:latest
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-order:5431/TSS_OrderService
+      - SPRING_DATASOURCE_URL=jdbc:mysql://theshoeshoporderservicedb.c5mitriv1zpn.us-east-1.rds.amazonaws.com:3306/TSS_OrderService
+      - SPRING_DATASOURCE_USERNAME:admin
+      - SPRING_DATASOURCE_PASSWORD:12345678
     depends_on:
-      - postgres-order
       - broker
       - zipkin
       - discovery-server
-      - api-gateway
 
   ## Inventory-Service Docker Compose Config
+#  inventory-service:
+#    container_name: inventory-service
+#    image: gayankod/inventory-service:latest
+#    pull_policy: always
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-inventory:5432/TSS_InventoryService
+#    depends_on:
+#      - postgres-inventory
+#      - discovery-server
+#      - api-gateway
+
   inventory-service:
     container_name: inventory-service
     image: gayankod/inventory-service:latest
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-inventory:5432/TSS_InventoryService
+      - SPRING_DATASOURCE_URL=jdbc:mysql://theshoeshopinventoryservicedb.c5mitriv1zpn.us-east-1.rds.amazonaws.com:3306/TSS_InventoryService
+      - SPRING_DATASOURCE_USERNAME:admin
+      - SPRING_DATASOURCE_PASSWORD:12345678
     depends_on:
-      - postgres-inventory
       - discovery-server
-      - api-gateway
 
   ## Notification-Service Docker Compose Config
   notification-service:
