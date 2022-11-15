@@ -36,3 +36,9 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+###Datasave files###
+/postgres-inventory
+/postgres-order
+/mongo-data
+.idea
