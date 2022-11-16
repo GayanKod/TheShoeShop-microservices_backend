@@ -3,16 +3,14 @@ version: '3'
 services:
 
   ## Mongo Docker Compose Config
-  mongo:
-    container_name: mongo
-    image: mongo:4.4.14-rc0-focal
-    restart: unless-stopped
-    ports:
-      - "27017:27017"
-    expose:
-      - "27017"
-    volumes:
-      - ./mongo-data:/data/db
+#  mongo:
+#    container_name: mongo
+#    image: mongo:4.4.14-rc0-focal
+#    restart: unless-stopped
+#    ports:
+#      - "27017:27017"
+#    expose:
+#      - "27017"
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.1
@@ -25,7 +23,7 @@ services:
     image: confluentinc/cp-kafka:7.0.1
     container_name: broker
     ports:
-      - "9092:9092"
+      - "9092"
     depends_on:
       - zookeeper
     environment:
@@ -42,26 +40,26 @@ services:
     image: openzipkin/zipkin
     container_name: zipkin
     ports:
-      - "9411:9411"
+      - "9411"
 
   ## Eureka Server
   discovery-server:
-    image: gayankod/discovery-server:latest
+    image: public.ecr.aws/j5t2a7s3/discovery-server:latest
     container_name: discovery-server
     pull_policy: always
     ports:
-      - "8761:8761"
+      - "8761"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - zipkin
 
   api-gateway:
-    image: gayankod/api-gateway:latest
+    image: public.ecr.aws/j5t2a7s3/api-gateway:latest
     container_name: api-gateway
     pull_policy: always
     ports:
-      - "8181:8080"
+      - "8181"
     expose:
       - "8181"
     environment:
@@ -71,31 +69,31 @@ services:
       - zipkin
       - discovery-server
 
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
-      ME_CONFIG_MONGODB_ADMINPASSWORD: 199959
-      ME_CONFIG_MONGODB_URL: mongodb+srv://admin:199959@cluster0.fy21wpp.mongodb.net
+#  mongo-express:
+#    image: mongo-express
+#    restart: always
+#    ports:
+#      - "8081"
+#    environment:
+#      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+#      ME_CONFIG_MONGODB_ADMINPASSWORD: 199959
+#      ME_CONFIG_MONGODB_URL: mongodb+srv://admin:199959@cluster0.fy21wpp.mongodb.net
 
   ## Product-Service Docker Compose Config
-  product-service:
-    container_name: product-service
-    image: gayankod/product-service:latest
-    pull_policy: always
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - mongo-express
-      - discovery-server
-      - api-gateway
+#  product-service:
+#    container_name: product-service
+#    image: public.ecr.aws/j5t2a7s3/product-service:latest
+#    pull_policy: always
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=docker
+#    depends_on:
+#      - mongo-express
+#      - discovery-server
+#      - api-gateway
 
   order-service:
     container_name: order-service
-    image: gayankod/order-service:latest
+    image: public.ecr.aws/j5t2a7s3/order-service:latest
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
@@ -110,7 +108,7 @@ services:
 
   inventory-service:
     container_name: inventory-service
-    image: gayankod/inventory-service:latest
+    image: public.ecr.aws/j5t2a7s3/inventory-service:latest
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
@@ -123,7 +121,7 @@ services:
   ## Notification-Service Docker Compose Config
   notification-service:
     container_name: notification-service
-    image: gayankod/notification-service:latest
+    image: public.ecr.aws/j5t2a7s3/notification-service:latest
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
