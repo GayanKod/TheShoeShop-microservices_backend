@@ -79,7 +79,7 @@ services:
 #      ME_CONFIG_MONGODB_ADMINPASSWORD: 199959
 #      ME_CONFIG_MONGODB_URL: mongodb+srv://admin:199959@cluster0.fy21wpp.mongodb.net
 
-  ## Product-Service Docker Compose Config
+#  # Product-Service Docker Compose Config
 #  product-service:
 #    container_name: product-service
 #    image: public.ecr.aws/j5t2a7s3/product-service:latest
@@ -90,6 +90,8 @@ services:
 #      - mongo-express
 #      - discovery-server
 #      - api-gateway
+#    ports:
+#      - "8080"
 
   order-service:
     container_name: order-service
@@ -104,6 +106,8 @@ services:
       - broker
       - zipkin
       - discovery-server
+    ports:
+      - "8282"
 
 
   inventory-service:
@@ -117,6 +121,8 @@ services:
       - SPRING_DATASOURCE_PASSWORD:12345678
     depends_on:
       - discovery-server
+    ports:
+      - "8383"
 
   ## Notification-Service Docker Compose Config
   notification-service:

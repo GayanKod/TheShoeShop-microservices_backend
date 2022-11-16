@@ -1,0 +1,2 @@
+docker-compose -p "the-shoe-shop" up
+docker-compose -p "the-shoe-shop" down

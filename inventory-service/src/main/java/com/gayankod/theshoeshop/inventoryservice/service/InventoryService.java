@@ -38,4 +38,8 @@ public class InventoryService {
                 ).toList();
 
     }
+
+    public List<Inventory> getInventory() {
+         return inventoryRepository.findAll();
+    }
 }

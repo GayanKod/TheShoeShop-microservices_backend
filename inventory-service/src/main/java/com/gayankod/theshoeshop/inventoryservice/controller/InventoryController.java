@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/inventory")
 @RequiredArgsConstructor
 public class InventoryController {
 
@@ -18,17 +17,23 @@ public class InventoryController {
 
     // http://localhost:8082/api/inventory?skuCode=Nike_W&skuCode=Nike_Blk
 
-    @GetMapping
+    @GetMapping("/api/inventory")
     @ResponseStatus(HttpStatus.OK)
     public List<InventoryResponse> isInStock(@RequestParam List<String> skuCode){
         return inventoryService.isInStock(skuCode);
     }
 
-    @PostMapping
+    @PostMapping("/api/inventory")
     @ResponseStatus(HttpStatus.CREATED)
     public String createInventory(@RequestBody Inventory inventory){
         inventoryService.createInventory(inventory);
         return "Inventory created Successfully";
+    }
+
+    @GetMapping("/api/inventory/all")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Inventory> getInventory(){
+        return inventoryService.getInventory();
     }
 
 }
