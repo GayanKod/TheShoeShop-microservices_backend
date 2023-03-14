@@ -2,6 +2,37 @@
 version: '3'
 services:
 
+  postgres-order:
+    container_name: postgres-order
+    image: postgres
+    environment:
+      POSTGRES_DB: order-service
+      POSTGRES_USER: ptechie
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgres
+    volumes:
+      - ./postgres-order:/data/postgres
+    expose:
+      - "5431"
+    ports:
+      - "5431:5431"
+    command: -p 5431
+    restart: always
+
+  postgres-inventory:
+      container_name: postgres-inventory
+      image: postgres
+      environment:
+        POSTGRES_DB: inventory-service
+        POSTGRES_USER: ptechie
+        POSTGRES_PASSWORD: password
+        PGDATA: /data/postgres
+      volumes:
+        - ./postgres-inventory:/data/postgres
+      ports:
+        - "5432:5432"
+      restart: always
+
   ## Mongo Docker Compose Config
   mongo:
     container_name: mongo
@@ -99,9 +130,9 @@ services:
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/TSS_OrderService
-      - SPRING_DATASOURCE_USERNAME:root
-      - SPRING_DATASOURCE_PASSWORD:Gayan644*
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-order:5431/order-service
+#      - SPRING_DATASOURCE_USERNAME:root
+#      - SPRING_DATASOURCE_PASSWORD:Gayan644*
     depends_on:
       - broker
       - zipkin
@@ -114,9 +145,9 @@ services:
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/TSS_InventoryService
-      - SPRING_DATASOURCE_USERNAME:root
-      - SPRING_DATASOURCE_PASSWORD:Gayan644*
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-inventory:5432/inventory-service
+#      - SPRING_DATASOURCE_USERNAME:root
+#      - SPRING_DATASOURCE_PASSWORD:Gayan644*
     depends_on:
       - discovery-server
 
