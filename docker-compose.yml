@@ -79,7 +79,7 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
       ME_CONFIG_MONGODB_ADMINPASSWORD: 199959
-      ME_CONFIG_MONGODB_URL: mongodb+srv://admin:199959@cluster0.fy21wpp.mongodb.net
+      ME_CONFIG_MONGODB_URL: mongodb+srv://admin:199959@cluster0.fy21wpp.mongodb.net/test
 
   ## Product-Service Docker Compose Config
   product-service:
@@ -99,9 +99,9 @@ services:
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:mysql://theshoeshoporderservicedb.c5mitriv1zpn.us-east-1.rds.amazonaws.com:3306/TSS_OrderService
-      - SPRING_DATASOURCE_USERNAME:admin
-      - SPRING_DATASOURCE_PASSWORD:12345678
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/TSS_OrderService
+      - SPRING_DATASOURCE_USERNAME:root
+      - SPRING_DATASOURCE_PASSWORD:Gayan644*
     depends_on:
       - broker
       - zipkin
@@ -114,9 +114,9 @@ services:
     pull_policy: always
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:mysql://theshoeshopinventoryservicedb.c5mitriv1zpn.us-east-1.rds.amazonaws.com:3306/TSS_InventoryService
-      - SPRING_DATASOURCE_USERNAME:admin
-      - SPRING_DATASOURCE_PASSWORD:12345678
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/TSS_InventoryService
+      - SPRING_DATASOURCE_USERNAME:root
+      - SPRING_DATASOURCE_PASSWORD:Gayan644*
     depends_on:
       - discovery-server
 
