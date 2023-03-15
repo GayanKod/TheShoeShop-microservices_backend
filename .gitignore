@@ -42,3 +42,4 @@ build/
 /postgres-order
 /mongo-data
 .idea
+/mysql_keycloak_data/
