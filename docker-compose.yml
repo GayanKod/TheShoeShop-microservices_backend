@@ -165,7 +165,6 @@ services:
       - zipkin
       - discovery-server
 
-
   inventory-service:
     container_name: inventory-service
     image: gayankod/inventory-service:latest
