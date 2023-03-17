@@ -7,7 +7,7 @@ services:
     image: postgres
     environment:
       POSTGRES_DB: order-service
-      POSTGRES_USER: ptechie
+      POSTGRES_USER: gayankod
       POSTGRES_PASSWORD: password
       PGDATA: /data/postgres
     volumes:
@@ -24,7 +24,7 @@ services:
       image: postgres
       environment:
         POSTGRES_DB: inventory-service
-        POSTGRES_USER: ptechie
+        POSTGRES_USER: gayankod
         POSTGRES_PASSWORD: password
         PGDATA: /data/postgres
       volumes:
@@ -160,8 +160,6 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-order:5431/order-service
-#      - SPRING_DATASOURCE_USERNAME:root
-#      - SPRING_DATASOURCE_PASSWORD:Gayan644*
     depends_on:
       - broker
       - zipkin
@@ -175,8 +173,6 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-inventory:5432/inventory-service
-#      - SPRING_DATASOURCE_USERNAME:root
-#      - SPRING_DATASOURCE_PASSWORD:Gayan644*
     depends_on:
       - discovery-server
 
