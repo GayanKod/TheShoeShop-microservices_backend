@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.metadata.labels.app }}
+  name: {{ .Values.metadata.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.metadata.labels.app }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.metadata.labels.app }}
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_DATABASE
+              value: {{ .Values.env.DB_Name }}
+            - name: MYSQL_PASSWORD
+              value: {{ .Values.env.DB_Password }}
+            - name: MYSQL_ROOT_PASSWORD
+              value: {{ .Values.env.DB_root_password }}
+            - name: MYSQL_USER
+              value: {{ .Values.env.DB_Name }}
+          image: "{{ .Values.image.name}}:{{ .Values.image.tag}}"
+          name: {{ .Values.metadata.name }}
+          resources: {}
+      restartPolicy: Always
+status: {}

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.metadata.labels.app}}
+  name: {{ .Values.metadata.name}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.metadata.labels.app}}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+
+      labels:
+        app: {{ .Values.metadata.labels.app}}
+    spec:
+      containers:
+        - args:
+            - start-dev
+          env:
+            - name: DB_ADDR
+              value: mysql
+            - name: DB_DATABASE
+              value: {{ .Values.env.DB_Name }}
+            - name: DB_PASSWORD
+              value: {{ .Values.env.DB_Password }}
+            - name: DB_USER
+              value: {{ .Values.env.MySql_user }}
+            - name: DB_VENDOR
+              value: {{ .Values.env.DB_vendor }}
+            - name: KEYCLOAK_ADMIN
+              value: {{ .Values.env.keyclaok_admin }}
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: {{ .Values.env.keycloak_password}}
+          image: "{{.Values.image.name}}:{{.Values.image.tag}}"
+          name: {{.Values.metadata.name}}
+          ports:
+            - containerPort: 8080
+          resources: {}
+      restartPolicy: Always
+status: {}

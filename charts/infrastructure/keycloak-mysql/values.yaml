@@ -1,0 +1,14 @@
+metadata:
+  labels:
+    app: keycloak-mysql
+  name: keycloak-mysql
+
+image:
+  name: mysql
+  tag: 5.7
+
+env:
+  DB_Name: keycloak
+  DB_Password: password
+  DB_root_password: root
+  MySql_user: keycloak

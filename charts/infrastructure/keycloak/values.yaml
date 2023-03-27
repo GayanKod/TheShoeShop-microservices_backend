@@ -1,0 +1,21 @@
+metadata:
+  labels:
+    app: keycloak
+  name: keycloak
+
+image:
+  name: quay.io/keycloak/keycloak
+  tag: 18.0.0
+
+env:
+  DB_Name: keycloak
+  DB_Password: password
+  DB_root_password: root
+  MySql_user: keycloak
+  DB_vendor: MYSQL
+  keyclaok_admin: admin
+  keycloak_password: admin
+
+ingress:
+  name: auth-ingress
+  host: "keycloak.demo.com"
