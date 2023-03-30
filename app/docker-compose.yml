@@ -33,18 +33,6 @@ services:
         - "5432:5432"
       restart: always
 
-  ## Mongo Docker Compose Config
-  mongo:
-    container_name: mongo
-    image: mongo:4.4.14-rc0-focal
-    restart: unless-stopped
-    ports:
-      - "27017:27017"
-    expose:
-      - "27017"
-    volumes:
-      - ./mongo-data:/data/db
-
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.1
     container_name: zookeeper
@@ -101,6 +89,7 @@ services:
     depends_on:
       - zipkin
       - discovery-server
+      - keycloak
 
   mongo-express:
     image: mongo-express
@@ -161,9 +150,11 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-order:5431/order-service
     depends_on:
+      - postgres-order
       - broker
       - zipkin
       - discovery-server
+      - api-gateway
 
   inventory-service:
     container_name: inventory-service
@@ -173,7 +164,9 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-inventory:5432/inventory-service
     depends_on:
+      - postgres-inventory
       - discovery-server
+      - api-gateway
 
   ## Notification-Service Docker Compose Config
   notification-service:
