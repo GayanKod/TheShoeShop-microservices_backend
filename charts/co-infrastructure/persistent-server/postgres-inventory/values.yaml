@@ -1,0 +1,18 @@
+replicas: 1
+
+metadata:
+  labels:
+    app: postgres-inventory
+  name: postgres-inventory
+
+volume:
+  mountPath: /data/postgres
+  name: postgres-inventory-claim0
+
+postgres:
+  DB_Name: inventory-service
+  DB_Password: password
+  DB_User: gayankod
+
+container:
+  port: 5432
