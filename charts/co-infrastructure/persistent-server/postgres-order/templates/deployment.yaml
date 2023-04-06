@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.metadata.labels.app }}
+  name: {{ .Values.metadata.name}}
+spec:
+  replicas: {{ .Values.replicas}}
+  selector:
+    matchLabels:
+      app: {{ .Values.metadata.labels.app }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.metadata.labels.app }}
+    spec:
+      containers:
+        - args:
+            - -p
+            - "5431"
+          env:
+            - name: PGDATA
+              value: {{ .Values.volume.mountPath}}
+            - name: POSTGRES_DB
+              value: {{ .Values.postgres.DB_Name}}
+            - name: POSTGRES_PASSWORD
+              value: {{ .Values.postgres.DB_Password}}
+            - name: POSTGRES_USER
+              value: {{ .Values.postgres.DB_User}}
+          image: postgres
+          name: {{ .Values.metadata.name}}
+          ports:
+            - containerPort: {{ .Values.container.port}}
+          resources: {}
+          volumeMounts:
+            - mountPath: {{ .Values.volume.mountPath}}
+              name: {{ .Values.volume.name}}
+      restartPolicy: Always
+      volumes:
+        - name: {{ .Values.volume.name}}
+          persistentVolumeClaim:
+            claimName: {{ .Values.volume.name}}
+status: {}

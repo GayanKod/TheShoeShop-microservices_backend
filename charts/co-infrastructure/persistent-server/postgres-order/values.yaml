@@ -1,0 +1,18 @@
+replicas: 1
+
+metadata:
+  labels:
+    app: postgres-order
+  name: postgres-order
+
+volume:
+  mountPath: /data/postgres
+  name: postgres-order-claim0
+
+postgres:
+  DB_Name: order-service
+  DB_Password: password
+  DB_User: gayankod
+
+container:
+  port: 5431
