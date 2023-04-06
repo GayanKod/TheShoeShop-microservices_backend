@@ -31,8 +31,6 @@ class ProductServiceApplicationTests {
 	//and added spring.data.mongodb.uri property dynamically at the time of creating the test
 	@Autowired
 	private MockMvc mockMvc;
-//	@Autowired
-//	private ObjectMapper objMapper;
 	ObjectMapper objMapper = new ObjectMapper();
 
 	@DynamicPropertySource
