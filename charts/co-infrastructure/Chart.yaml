@@ -1,0 +1,15 @@
+apiVersion: v2
+
+name: co-infrastructure
+
+description:  co-infrastructure umbrella chart
+
+version: 0.1.0
+
+dependencies:
+  - name: identity-server
+    version: 0.1.0
+    repository: "../co-infrastructure/identity-server"
+  - name: persistent-server
+    version: 0.1.0
+    repository: "../co-infrastructure/persistent-server"
