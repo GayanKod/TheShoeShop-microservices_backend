@@ -1,0 +1,9 @@
+dependencies:
+- name: identity-server
+  repository: ""
+  version: 0.1.0
+- name: persistent-server
+  repository: ""
+  version: 0.1.0
+digest: sha256:631a799f8cd5312f378e17633a47a485d8865982ce7d8667d2b6eef4e708aca6
+generated: "2023-04-11T19:20:36.827794931+05:30"

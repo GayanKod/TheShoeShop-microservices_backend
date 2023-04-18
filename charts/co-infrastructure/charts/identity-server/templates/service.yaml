@@ -1,0 +1,43 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   labels:
+#     app: {{ .Values.metadata.labels.app}}
+#   name: {{ .Values.metadata.name}}
+# spec:
+#   ports:
+#     - name: "8080"
+#       port: 8080
+#       targetPort: 8080
+#   selector:
+#     app: {{ .Values.metadata.labels.app}}
+# status:
+#   loadBalancer: {}
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: {{ .Values.metadata.name}}
+#   labels:
+#     app: {{ .Values.metadata.labels.app}}
+# spec:
+#   ports:
+#   - name: http
+#     port: 8080
+#     targetPort: 8080
+#   selector:
+#     app: {{ .Values.metadata.labels.app}}
+#   type: LoadBalancer
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.metadata.name}}
+spec:
+  selector:
+    app: {{ .Values.metadata.labels.app}}
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP

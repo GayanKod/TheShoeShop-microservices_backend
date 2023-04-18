@@ -35,6 +35,10 @@ spec:
               value: {{ .Values.env.keyclaok_admin }}
             - name: KEYCLOAK_ADMIN_PASSWORD
               value: {{ .Values.env.keycloak_password}}
+            - name: KC_PROXY
+              value: "edge"
+            - name: KEYCLOAK_HOSTNAME
+              value: {{ .Values.ingress.host}}
           image: "{{.Values.image.name}}:{{.Values.image.tag}}"
           name: {{.Values.metadata.name}}
           ports:
