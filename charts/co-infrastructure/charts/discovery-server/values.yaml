@@ -1,0 +1,10 @@
+metadata:
+  labels:
+    app: discovery-server
+  name: discovery-server
+
+container:
+  image: gayankod/discovery-server
+  tag: latest
+  name: discovery-server
+  port: 8761

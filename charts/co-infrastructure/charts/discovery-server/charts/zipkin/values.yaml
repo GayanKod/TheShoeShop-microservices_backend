@@ -1,0 +1,12 @@
+replicas: 1
+
+metadata:
+  labels:
+    app: zipkin
+  name: zipkin
+
+container:
+  image: openzipkin/zipkin
+  name: zipkin
+  port: 9411
+

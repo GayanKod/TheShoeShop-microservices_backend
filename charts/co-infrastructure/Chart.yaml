@@ -9,7 +9,7 @@ version: 0.1.0
 dependencies:
   - name: identity-server
     version: 0.1.0
-    # repository: "https://github.com/GayanKod/TheShoeShop-microservices_backend/tree/deploy-to-k8s/charts/co-infrastructure/identity-server"
   - name: persistent-server
     version: 0.1.0
-    # repository: "https://github.com/GayanKod/TheShoeShop-microservices_backend/tree/deploy-to-k8s/charts/co-infrastructure/persistent-server"
+  - name: discovery-server
+    version: 0.1.0
