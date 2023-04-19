@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.metadata.name}}
+  labels:
+    app: {{ .Values.metadata.labels.app}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.metadata.labels.app}}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.metadata.labels.app}}
+    spec:
+      containers:
+        - env:
+            - name: ZOOKEEPER_CLIENT_PORT
+              value: "2181"
+            - name: ZOOKEEPER_TICK_TIME
+              value: "2000"
+          image: "{{ .Values.container.image}}:{{ .Values.container.tag}}"
+          name: {{ .Values.container.name }}

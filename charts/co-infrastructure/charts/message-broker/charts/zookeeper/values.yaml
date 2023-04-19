@@ -1,0 +1,10 @@
+metadata:
+  name: zookeeper
+  labels:
+    app: zookeeper
+
+container:
+  name: zookeeper
+  image: confluentinc/cp-zookeeper
+  tag: 7.0.1
+  port: 2181

@@ -1,0 +1,10 @@
+metadata:
+  labels:
+    app: broker
+  name: broker
+
+container:
+  name: broker
+  image: confluentinc/cp-kafka
+  tag: 7.0.1
+  port: 9092
