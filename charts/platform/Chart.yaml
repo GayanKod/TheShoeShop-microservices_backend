@@ -1,0 +1,11 @@
+apiVersion: v2
+
+name: platform
+
+description:  Platform umbrella chart
+
+version: 0.1.0
+
+dependencies:
+  - name: api-gateway
+    version: 0.1.0

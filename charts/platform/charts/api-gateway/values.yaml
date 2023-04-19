@@ -1,0 +1,11 @@
+metadata:
+  labels:
+    app: api-gateway
+  name: api-gateway
+
+container:
+  image: gayankod/api-gateway
+  tag: latest
+  name: api-gateway
+  port: 8181
+  targetPort: 8080

@@ -1,0 +1,6 @@
+dependencies:
+- name: api-gateway
+  repository: ""
+  version: 0.1.0
+digest: sha256:e60bfd00243073c8cb7d6be5f231a56b8345fdea9dd47f963a7e19155cd3f4a7
+generated: "2023-04-19T18:05:31.8632123+05:30"
