@@ -1,0 +1,17 @@
+apiVersion: v2
+
+name: business
+
+description:  Business layer umbrella chart
+
+version: 0.1.0
+
+dependencies:
+  - name: order-service
+    version: 0.1.0
+  - name: inventory-service
+    version: 0.1.0
+  - name: product-service
+    version: 0.1.0
+  - name: notification-service
+    version: 0.1.0
