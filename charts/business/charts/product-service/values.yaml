@@ -1,0 +1,13 @@
+replicas: 1
+
+metadata:
+  labels:
+    app: product-service
+  name: product-service
+
+container:
+  image: gayankod/product-service
+  tag: latest
+  name: product-service
+  port: 80
+  targetPort: 9194
