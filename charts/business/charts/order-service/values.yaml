@@ -1,0 +1,13 @@
+replicas: 1
+
+metadata:
+  labels:
+    app: order-service
+  name: order-service
+
+container:
+  image: gayankod/order-service
+  tag: latest
+  name: order-service
+  port: 80
+  targetPort: 9193
