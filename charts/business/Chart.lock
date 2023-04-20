@@ -1,0 +1,15 @@
+dependencies:
+- name: order-service
+  repository: ""
+  version: 0.1.0
+- name: inventory-service
+  repository: ""
+  version: 0.1.0
+- name: product-service
+  repository: ""
+  version: 0.1.0
+- name: notification-service
+  repository: ""
+  version: 0.1.0
+digest: sha256:e8493f4e427635d3ed7c1868edbe5c59c9153dcf34e6afcb7544dc1859d27a23
+generated: "2023-04-20T11:13:01.45777031+05:30"
