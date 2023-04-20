@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.metadata.labels.app}}
+  name: {{ .Values.metadata.name}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.metadata.labels.app}}
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.metadata.labels.app}}
+    spec:
+      containers:
+        - env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+          image: "{{ .Values.container.image}}:{{ .Values.container.tag}}"
+          name: {{ .Values.container.name}}
+          resources: {}
+      restartPolicy: Always
+status: {}

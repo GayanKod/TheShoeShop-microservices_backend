@@ -1,0 +1,13 @@
+replicas: 1
+
+metadata:
+  labels:
+    app: notification-service
+  name: notification-service
+
+container:
+  image: gayankod/notification-service
+  tag: latest
+  name: notification-service
+  port: 80
+  targetPort: 9192
