@@ -1,0 +1,13 @@
+replicas: 1
+
+metadata:
+  labels:
+    app: inventory-service
+  name: inventory-service
+
+container:
+  image: gayankod/inventory-service
+  tag: latest
+  name: inventory-service
+  port: 80
+  targetPort: 9191
