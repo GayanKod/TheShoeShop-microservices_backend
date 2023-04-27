@@ -5,21 +5,23 @@ terraform{
       version = ">= 4.1.0"
     }
 
-    azurerm = {
-      source = "hashicorp/azurerm"
-      version = "3.39.1"
-    }
+    # azurerm = {
+    #   source = "hashicorp/azurerm"
+    #   version = "3.39.1"
+    # }
   }
 }
 
-provider "azurerm" {
-  features {
-  }
-}
+# provider "azurerm" {
+#   features {
+#   }
+# }
 
 provider "keycloak" {
   client_id = var.client_id_auth
-  username 	= data.azurerm_key_vault_secret.keycloak-username.value
-  password 	= data.azurerm_key_vault_secret.keycloak-password.value
+  # username 	= data.azurerm_key_vault_secret.keycloak-username.value
+  # password 	= data.azurerm_key_vault_secret.keycloak-password.value
+  username 	= "admin"
+  password 	= "admin"
   url 		= var.server_url
 }

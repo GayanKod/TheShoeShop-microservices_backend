@@ -27,5 +27,5 @@ variable "realm_display_name" {
 }
 
 variable "server_url" {
-  default = "http://keycloak.demo.com:41041/"
+  default = "http://keycloak.demo.com:9191/"
 }
