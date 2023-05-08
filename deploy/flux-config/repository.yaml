@@ -1,0 +1,31 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: TheShoeShop-microservices_backend
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: <https://github.com/GayanKod/TheShoeShop-microservices_backend>
+  ref:
+    branch: main
+  ignore: |
+    # exclude all
+    /*
+    # include charts directory
+    !/manifests/
+
+---
+
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: TheShoeShop-microservices_backend
+  namespace: flux-system
+spec:
+  interval: 5m0s
+  path: ./deploy/manifests
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: TheShoeShop-microservices_backend
+  targetNamespace: default
