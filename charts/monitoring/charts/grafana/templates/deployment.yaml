@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: F:\tools\kompose.exe convert
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    app: {{ .Values.metadata.labels.app}}
+  name: {{ .Values.metadata.name}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.metadata.labels.app}}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.metadata.labels.app}}
+    spec:
+      containers:
+        - env:
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              value: password
+            - name: GF_SECURITY_ADMIN_USER
+              value: admin
+          image: "{{ .Values.container.image}}:{{ .Values.container.tag}}"
+          name: {{ .Values.container.name}}
+          ports:
+            - containerPort: {{ .Values.container.port}}
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: grafana-claim0
+      restartPolicy: Always
+      volumes:
+        - name: grafana-claim0
+          persistentVolumeClaim:
+            claimName: grafana-claim0
+status: {}

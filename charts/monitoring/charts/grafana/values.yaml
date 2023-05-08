@@ -1,0 +1,10 @@
+metadata:
+  labels:
+    app: grafana
+  name: grafana
+
+container:
+  port: 3000
+  name: grafana
+  image: grafana/grafana-oss
+  tag: 8.5.2
