@@ -1,0 +1,13 @@
+apiVersion: v2
+
+name: monitoring
+
+description:  Monitoring layer umbrella chart
+
+version: 0.1.0
+
+dependencies:
+  - name: prometheus
+    version: 0.1.0
+  - name: grafana
+    version: 0.1.0

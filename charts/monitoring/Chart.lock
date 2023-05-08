@@ -1,0 +1,9 @@
+dependencies:
+- name: prometheus
+  repository: ""
+  version: 0.1.0
+- name: grafana
+  repository: ""
+  version: 0.1.0
+digest: sha256:c58913ed0515722b1acddd70c51bcd96454f7a71f52391e7ffb971e1a8f325ff
+generated: "2023-05-04T13:05:23.160396792+05:30"
