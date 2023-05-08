@@ -1,0 +1,10 @@
+metadata:
+  labels:
+    app: prometheus
+  name: prometheus
+
+container:
+  port: 9090
+  name: prometheus
+  image: prom/prometheus
+  tag: v2.37.1
