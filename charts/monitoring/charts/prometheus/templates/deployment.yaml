@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: F:\tools\kompose.exe convert
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    app: {{ .Values.metadata.labels.app}}
+  name: {{ .Values.metadata.name}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.metadata.labels.app}}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+
+      labels:
+        app: {{ .Values.metadata.labels.app}}
+    spec:
+      containers:
+        - image: "{{ .Values.container.image}}:{{ .Values.container.tag}}"
+          name: {{ .Values.container.name}}
+          ports:
+            - containerPort: {{ .Values.container.port}}
+          resources: {}
+          volumeMounts:
+            - mountPath: ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+              name: prometheus-claim0
+      restartPolicy: Always
+      volumes:
+        - name: prometheus-claim0
+          persistentVolumeClaim:
+            claimName: prometheus-claim0
+status: {}
