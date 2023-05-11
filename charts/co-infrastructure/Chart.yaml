@@ -11,5 +11,5 @@ dependencies:
     version: 0.1.0
   - name: persistent-server
     version: 0.1.0
-  - name: discovery-server
+  - name: message-broker
     version: 0.1.0
