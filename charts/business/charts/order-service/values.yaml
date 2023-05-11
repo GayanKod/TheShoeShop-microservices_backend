@@ -6,7 +6,7 @@ metadata:
   name: order-service
 
 container:
-  image: gayankod/order-service
+  image: gayankod/order-service-2.0
   tag: latest
   name: order-service
   port: 80

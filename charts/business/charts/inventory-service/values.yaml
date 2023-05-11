@@ -6,7 +6,7 @@ metadata:
   name: inventory-service
 
 container:
-  image: gayankod/inventory-service
+  image: gayankod/inventory-service-2.0
   tag: latest
   name: inventory-service
   port: 80
