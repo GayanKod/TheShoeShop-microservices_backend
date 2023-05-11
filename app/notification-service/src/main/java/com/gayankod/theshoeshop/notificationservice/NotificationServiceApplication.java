@@ -8,7 +8,6 @@ import org.springframework.kafka.annotation.KafkaListener;
 
 @SpringBootApplication
 @Slf4j
-@EnableEurekaClient
 public class NotificationServiceApplication {
 
     public static void main(String[] args) {
