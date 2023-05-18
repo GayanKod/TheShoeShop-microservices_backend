@@ -42,7 +42,7 @@ public class OrderService {
 
 //        Calling Inventory Service to check the product is in stock and place the order
         InventoryResponse[] callInventoryResults = webClientBuilder.build().get()
-                .uri("http://inventory-service/api/inventory",
+                .uri("http://inventory-service.default.svc.cluster.local/api/inventory",
                         uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                         .retrieve()
                         .bodyToMono(InventoryResponse[].class)
@@ -55,7 +55,7 @@ public class OrderService {
             kafkaTemplate.send("notification", new OrderPlacedEvent(order.getOrderNumber()));
             return "Order placed Successfully";
         }else {
-            throw new IllegalArgumentException("Products are out of stock");
+            return "Products are out of stock";
         }
     }
 
