@@ -28,11 +28,18 @@ spec:
             - containerPort: {{ .Values.container.port}}
           resources: {}
           volumeMounts:
-            - mountPath: ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-              name: prometheus-claim0
+            - mountPath: /etc/prometheus/
+              name: prometheus-config
       restartPolicy: Always
       volumes:
-        - name: prometheus-claim0
-          persistentVolumeClaim:
-            claimName: prometheus-claim0
+        - name: prometheus-config
+          configMap:
+            name: prometheus-config
 status: {}
+
+---
+
+
+
+
+# kubectl create configmap prometheus-config --from-file=../app/prometheus/prometheus.yml
