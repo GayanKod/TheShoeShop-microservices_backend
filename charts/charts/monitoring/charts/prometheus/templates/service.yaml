@@ -5,12 +5,12 @@ metadata:
     app: {{ .Values.metadata.labels.app}}
   name: {{ .Values.metadata.name}}
 spec:
-  type: LoadBalancer
   ports:
-    - name: "8181"
+    - name: http
       port: {{ .Values.container.port}}
-      targetPort: {{  .Values.container.targetPort}}
+      targetPort: {{ .Values.container.port}}
   selector:
     app: {{ .Values.metadata.labels.app}}
-status:
-  loadBalancer: {}
+  type: ClusterIP
+
+

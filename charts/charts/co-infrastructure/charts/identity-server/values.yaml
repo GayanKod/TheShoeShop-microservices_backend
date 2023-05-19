@@ -17,5 +17,5 @@ env:
   keycloak_password: admin
 
 ingress:
-  name: auth-ingress
-  host: "keycloak.demo.com"
+  name: keycloak-ingress
+  host: "keycloak.theshoeshop.com"

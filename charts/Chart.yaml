@@ -1,0 +1,15 @@
+apiVersion: v2
+
+name: the-shoe-shop
+
+description:  Universal Umbrella Chart for the whole Application'
+
+version: 0.1.0
+
+dependencies:
+  - name: co-infrastructure
+    version: 0.1.0
+  - name: business
+    version: 0.1.0
+  - name: monitoring
+    version: 0.1.0

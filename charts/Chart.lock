@@ -1,0 +1,12 @@
+dependencies:
+- name: co-infrastructure
+  repository: ""
+  version: 0.1.0
+- name: business
+  repository: ""
+  version: 0.1.0
+- name: monitoring
+  repository: ""
+  version: 0.1.0
+digest: sha256:1af191a26e45a5feba668cac2a7b917477762943ce161661cfd55657cbb4db1d
+generated: "2023-05-19T11:50:38.749550052+05:30"
