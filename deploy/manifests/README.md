@@ -1,10 +1,6 @@
 # Generating Manifests for a Three-Layered Application using Helm
 
-This application is divided into 3 layers when deploying to a Kubernetes cluster using Helm charts. Here are the commands to generate the manifests for each layer:
+This application is divided into 3 layers when deploying to a Kubernetes cluster using Helm charts. Here is the command to generate the manifests for whole application:
 
 ```bash
-helm template co-infrastructure ../../charts/co-infrastructure > co-infrastructure-manifests.yaml
-
-helm template platform ../../charts/platform > platform-manifests.yaml
-
-helm template business ../../charts/business > business-manifests.yaml
+helm template the-shoe-shop-1.0 ../../charts > manifests.yaml

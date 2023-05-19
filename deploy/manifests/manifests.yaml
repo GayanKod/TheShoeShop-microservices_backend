@@ -1,0 +1,867 @@
+---
+# Source: the-shoe-shop/charts/monitoring/charts/prometheus/templates/configMap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval:     10s
+      evaluation_interval: 10s
+
+    scrape_configs:
+      - job_name: 'product_service'
+        metrics_path: '/actuator/prometheus'
+        static_configs:
+          - targets: ['product-service.default.svc.cluster.local']
+            labels:
+              application: 'Product Service Application'
+      - job_name: 'order_service'
+        metrics_path: '/actuator/prometheus'
+        static_configs:
+          - targets: ['order-service.default.svc.cluster.local']
+            labels:
+              application: 'Order Service Application'
+      - job_name: 'inventory_service'
+        metrics_path: '/actuator/prometheus'
+        static_configs:
+          - targets: ['inventory-service.default.svc.cluster.local']
+            labels:
+              application: 'Inventory Service Application'
+      - job_name: 'notification_service'
+        metrics_path: '/actuator/prometheus'
+        static_configs:
+          - targets: ['notification-service.default.svc.cluster.local']
+            labels:
+              application: 'Notification Service Application'
+---
+# Source: the-shoe-shop/charts/co-infrastructure/charts/persistent-server/charts/postgres-inventory/templates/persistentVolumeClaim.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: postgres-inventory-claim0
+  name: postgres-inventory-claim0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+# Source: the-shoe-shop/charts/co-infrastructure/charts/persistent-server/charts/postgres-order/templates/persistentVolumeClaim.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: postgres-order-claim0
+  name: postgres-order-claim0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+# Source: the-shoe-shop/charts/monitoring/charts/grafana/templates/persistent-volume-claim.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    app: grafana-claim0
+  name: grafana-claim0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
+---
+# Source: the-shoe-shop/charts/business/charts/inventory-service/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: inventory-service
+  name: inventory-service
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 9191
+  selector:
+    app: inventory-service
+status:
+  loadBalancer: {}
+---
+# Source: the-shoe-shop/charts/business/charts/notification-service/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: notification-service
+  name: notification-service
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 9192
+  selector:
+    app: notification-service
+status:
+  loadBalancer: {}
+---
+# Source: the-shoe-shop/charts/business/charts/order-service/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: order-service
+  name: order-service
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 9193
+  selector:
+    app: order-service
+status:
+  loadBalancer: {}
+---
+# Source: the-shoe-shop/charts/business/charts/product-service/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: product-service
+  name: product-service
+spec:
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 9194
+  selector:
+    app: product-service
+status:
+  loadBalancer: {}
+---
+# Source: the-shoe-shop/charts/co-infrastructure/charts/identity-server/templates/service.yaml
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   labels:
+#     app: keycloak
+#   name: keycloak
+# spec:
+#   ports:
+#     - name: "8080"
+#       port: 8080
+#       targetPort: 8080
+#   selector:
+#     app: keycloak
+# status:
+#   loadBalancer: {}
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: keycloak
+#   labels:
+#     app: keycloak
+# spec:
+#   ports:
+#   - name: http
+#     port: 8080
+#     targetPort: 8080
+#   selector:
+#     app: keycloak
+#   type: LoadBalancer
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak
+spec:
+  selector:
+    app: keycloak
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+---
+# Source: the-shoe-shop/charts/co-infrastructure/charts/message-broker/charts/zookeeper/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: zookeeper
+  labels:
+    app: zookeeper
+spec:
+  selector:
+    app: zookeeper
+  ports:
+    - port: 2181
+      targetPort: 2181
+status:
+  loadBalancer: {}
+---
+# Source: the-shoe-shop/charts/co-infrastructure/charts/message-broker/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: F:\tools\kompose.exe convert
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    app: broker
+  name: broker
+spec:
+  ports:
+    - name: "9092"
+      port: 9092
+      targetPort: 9092
+  selector:
+    app: broker
+status:
+  loadBalancer: {}
+---
+# Source: the-shoe-shop/charts/co-infrastructure/charts/persistent-server/charts/postgres-inventory/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: postgres-inventory
+  name: postgres-inventory
+spec:
+  ports:
+    - name: "5432"
+      port: 5432
+      targetPort: 5432
+  selector:
+    app:  postgres-inventory
+status:
+  loadBalancer: {}
+---
+# Source: the-shoe-shop/charts/co-infrastructure/charts/persistent-server/charts/postgres-order/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: postgres-order
+  name: postgres-order
+spec:
+  ports:
+    - name: "5431"
+      port: 5431
+      targetPort: 5431
+  selector:
+    app: postgres-order
+status:
+  loadBalancer: {}
+---
+# Source: the-shoe-shop/charts/monitoring/charts/grafana/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: F:\tools\kompose.exe convert
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    app: grafana
+  name: grafana
+spec:
+  ports:
+    - name: "3000"
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: grafana
+status:
+  loadBalancer: {}
+---
+# Source: the-shoe-shop/charts/monitoring/charts/prometheus/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prometheus
+  name: prometheus
+spec:
+  ports:
+    - name: http
+      port: 9090
+      targetPort: 9090
+  selector:
+    app: prometheus
+  type: ClusterIP
+---
+# Source: the-shoe-shop/charts/business/charts/inventory-service/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: inventory-service
+  name: inventory-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-service
+  strategy: {}
+  template:
+    metadata:
+
+      labels:
+        app: inventory-service
+    spec:
+      containers:
+        - env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres-inventory:5432/inventory-service
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+          image: "gayankod/inventory-service-2.0:latest"
+          name: inventory-service
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+# Source: the-shoe-shop/charts/business/charts/notification-service/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: notification-service
+  name: notification-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification-service
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: notification-service
+    spec:
+      containers:
+        - env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+          image: "gayankod/notification-service-2.0:latest"
+          name: notification-service
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+# Source: the-shoe-shop/charts/business/charts/order-service/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: order-service
+  name: order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-service
+  strategy: {}
+  template:
+    metadata:
+
+      labels:
+        app: order-service
+    spec:
+      containers:
+        - env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres-order:5431/order-service
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+          image: "gayankod/order-service-2.0:latest"
+          name: order-service
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+# Source: the-shoe-shop/charts/business/charts/product-service/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: product-service
+  name: product-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-service
+  strategy: {}
+  template:
+    metadata:
+
+      labels:
+        app: product-service
+    spec:
+      containers:
+        - env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+          image: "gayankod/product-service-2.0:latest"
+          name: product-service
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+# Source: the-shoe-shop/charts/co-infrastructure/charts/identity-server/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: keycloak
+  name: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+
+      labels:
+        app: keycloak
+    spec:
+      containers:
+        - args:
+            - start-dev
+          env:
+            - name: DB_ADDR
+              value: mysql
+            - name: DB_DATABASE
+              value: keycloak
+            - name: DB_PASSWORD
+              value: password
+            - name: DB_USER
+              value: keycloak
+            - name: DB_VENDOR
+              value: MYSQL
+            - name: KEYCLOAK_ADMIN
+              value: admin
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: admin
+            - name: KC_PROXY
+              value: "edge"
+            - name: KEYCLOAK_HOSTNAME
+              value: keycloak.theshoeshop.com
+          image: "quay.io/keycloak/keycloak:18.0.0"
+          name: keycloak
+          ports:
+            - containerPort: 8080
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+# Source: the-shoe-shop/charts/co-infrastructure/charts/message-broker/charts/zookeeper/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeeper
+  labels:
+    app: zookeeper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zookeeper
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+    spec:
+      containers:
+        - env:
+            - name: ZOOKEEPER_CLIENT_PORT
+              value: '2181'
+            - name: ZOOKEEPER_TICK_TIME
+              value: '2000'
+          image: "confluentinc/cp-zookeeper:7.0.1"
+          name: zookeeper
+---
+# Source: the-shoe-shop/charts/co-infrastructure/charts/message-broker/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: broker
+  name: broker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broker
+  strategy: {}
+  template:
+    metadata:
+
+      labels:
+        app: broker
+    spec:
+      containers:
+        - env:
+            - name: KAFKA_ADVERTISED_LISTENERS
+              value: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://broker:29092
+            - name: KAFKA_BROKER_ID
+              value: "1"
+            - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
+              value: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+            - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
+              value: "1"
+            - name: KAFKA_TRANSACTION_STATE_LOG_MIN_ISR
+              value: "1"
+            - name: KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR
+              value: "1"
+            - name: KAFKA_ZOOKEEPER_CONNECT
+              value: 'zookeeper:2181'
+          image: "confluentinc/cp-kafka:7.0.1"
+          name: broker
+          ports:
+            - containerPort: 9092
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+# Source: the-shoe-shop/charts/co-infrastructure/charts/persistent-server/charts/keycloak-mysql/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: keycloak-mysql
+  name: keycloak-mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak-mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: keycloak-mysql
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_DATABASE
+              value: keycloak
+            - name: MYSQL_PASSWORD
+              value: password
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+            - name: MYSQL_USER
+              value: keycloak
+          image: "mysql:5.7"
+          name: keycloak-mysql
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+# Source: the-shoe-shop/charts/co-infrastructure/charts/persistent-server/charts/postgres-inventory/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: postgres-inventory
+  name: postgres-inventory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-inventory
+  template:
+    metadata:
+      labels:
+        app: postgres-inventory
+    spec:
+      containers:
+        - env:
+            - name: PGDATA
+              value: /data/postgres
+            - name: POSTGRES_DB
+              value: inventory-service
+            - name: POSTGRES_PASSWORD
+              value: password
+            - name: POSTGRES_USER
+              value: gayankod
+          image: postgres
+          name: postgres-inventory
+          ports:
+            - containerPort: 5432
+          resources: {}
+          volumeMounts:
+            - mountPath: /data/postgres
+              name: postgres-inventory-claim0
+      restartPolicy: Always
+      volumes:
+        - name: postgres-inventory-claim0
+          persistentVolumeClaim:
+            claimName: postgres-inventory-claim0
+---
+# Source: the-shoe-shop/charts/co-infrastructure/charts/persistent-server/charts/postgres-order/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: postgres-order
+  name: postgres-order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-order
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: postgres-order
+    spec:
+      containers:
+        - args:
+            - -p
+            - "5431"
+          env:
+            - name: PGDATA
+              value: /data/postgres
+            - name: POSTGRES_DB
+              value: order-service
+            - name: POSTGRES_PASSWORD
+              value: password
+            - name: POSTGRES_USER
+              value: gayankod
+          image: postgres
+          name: postgres-order
+          ports:
+            - containerPort: 5431
+          resources: {}
+          volumeMounts:
+            - mountPath: /data/postgres
+              name: postgres-order-claim0
+      restartPolicy: Always
+      volumes:
+        - name: postgres-order-claim0
+          persistentVolumeClaim:
+            claimName: postgres-order-claim0
+status: {}
+---
+# Source: the-shoe-shop/charts/monitoring/charts/grafana/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: F:\tools\kompose.exe convert
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    app: grafana
+  name: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - env:
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              value: password
+            - name: GF_SECURITY_ADMIN_USER
+              value: admin
+          image: "grafana/grafana-oss:8.5.2"
+          name: grafana
+          ports:
+            - containerPort: 3000
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: grafana-claim0
+      restartPolicy: Always
+      volumes:
+        - name: grafana-claim0
+          persistentVolumeClaim:
+            claimName: grafana-claim0
+status: {}
+---
+# Source: the-shoe-shop/charts/monitoring/charts/prometheus/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: F:\tools\kompose.exe convert
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    app: prometheus
+  name: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+
+      labels:
+        app: prometheus
+    spec:
+      containers:
+        - image: "prom/prometheus:v2.37.1"
+          name: prometheus
+          ports:
+            - containerPort: 9090
+          resources: {}
+          volumeMounts:
+            - mountPath: /etc/prometheus/
+              name: prometheus-config
+      restartPolicy: Always
+      volumes:
+        - name: prometheus-config
+          configMap:
+            name: prometheus-config
+status: {}
+---
+# Source: the-shoe-shop/charts/co-infrastructure/charts/identity-server/templates/ingress.yaml
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: keycloak-ingress
+# spec:
+#   rules:
+#     - host: keycloak.theshoeshop.com
+#       http:
+#         paths:
+#           - pathType: Prefix
+#             path: "/"
+#             backend:
+#               service:
+#                 name: keycloak
+#                 port:
+#                   number: 8080
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: keycloak-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: keycloak.theshoeshop.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: keycloak
+            port:
+              number: 8080
+---
+# Source: the-shoe-shop/charts/monitoring/charts/grafana/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: grafana.theshoeshop.com
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: grafana
+              port:
+                number: 3000
+---
+# Source: the-shoe-shop/charts/monitoring/charts/prometheus/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prometheus-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: prometheus.theshoeshop.com
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: prometheus
+              port:
+                number: 9090
+---
+# Source: the-shoe-shop/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: theshoeshop.com
+    http:
+      paths:
+      - path: /api/product
+        pathType: Prefix
+        backend:
+          service:
+            name: product-service
+            port:
+              number: 80
+      - path: /api/order
+        pathType: Prefix
+        backend:
+          service:
+            name: order-service
+            port:
+              number: 80
+      - path: /api/inventory
+        pathType: Prefix
+        backend:
+          service:
+            name: inventory-service
+            port:
+              number: 80
+---
+# Source: the-shoe-shop/charts/monitoring/charts/prometheus/templates/deployment.yaml
+# kubectl create configmap prometheus-config --from-file=../app/prometheus/prometheus.yml
