@@ -5,7 +5,7 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
     kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/custom-response-headers: "Access-Control-Allow-Origin:*||Access-Control-Allow-Methods:GET,POST,OPTIONS||Access-Control-Allow-Headers:DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range||Access-Control-Expose-Headers:Content-Length,Content-Range"
+    traefik.ingress.kubernetes.io/router.middlewares: default-cors@kubernetescrd
 spec:
   rules:
   - host: theshoeshop.com
@@ -32,5 +32,21 @@ spec:
             name: inventory-service
             port:
               number: 80
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: cors
+spec:
+  headers:
+    accessControlAllowMethods:
+      - "GET"
+      - "OPTIONS"
+      - "PUT"
+      - "POST"
+    accessControlAllowOriginList:
+      - "*"
 
 
