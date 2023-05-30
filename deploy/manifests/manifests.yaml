@@ -836,7 +836,7 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
     kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/custom-response-headers: "Access-Control-Allow-Origin:*||Access-Control-Allow-Methods:GET,POST,OPTIONS||Access-Control-Allow-Headers:DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range||Access-Control-Expose-Headers:Content-Length,Content-Range"
+    traefik.ingress.kubernetes.io/router.middlewares: default-cors@kubernetescrd
 spec:
   rules:
   - host: theshoeshop.com
@@ -866,3 +866,18 @@ spec:
 ---
 # Source: the-shoe-shop/charts/monitoring/charts/prometheus/templates/deployment.yaml
 # kubectl create configmap prometheus-config --from-file=../app/prometheus/prometheus.yml
+---
+# Source: the-shoe-shop/templates/ingress.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: cors
+spec:
+  headers:
+    accessControlAllowMethods:
+      - "GET"
+      - "OPTIONS"
+      - "PUT"
+      - "POST"
+    accessControlAllowOriginList:
+      - "*"
