@@ -836,7 +836,7 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
     kubernetes.io/ingress.class: traefik
-    traefik.ingress.kubernetes.io/router.middlewares: default-cors@kubernetescrd
+    # traefik.ingress.kubernetes.io/router.middlewares: default-cors@kubernetescrd
 spec:
   rules:
   - host: theshoeshop.com
@@ -868,16 +868,16 @@ spec:
 # kubectl create configmap prometheus-config --from-file=../app/prometheus/prometheus.yml
 ---
 # Source: the-shoe-shop/templates/ingress.yaml
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: cors
-spec:
-  headers:
-    accessControlAllowMethods:
-      - "GET"
-      - "OPTIONS"
-      - "PUT"
-      - "POST"
-    accessControlAllowOriginList:
-      - "*"
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: cors
+# spec:
+#   headers:
+#     accessControlAllowMethods:
+#       - "GET"
+#       - "OPTIONS"
+#       - "PUT"
+#       - "POST"
+#     accessControlAllowOriginList:
+#       - "*"
