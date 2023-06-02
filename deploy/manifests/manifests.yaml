@@ -416,7 +416,7 @@ spec:
         - env:
             - name: SPRING_PROFILES_ACTIVE
               value: docker
-          image: "gayankod/product-service-2.0:latest"
+          image: "gayankod/product-service-2.1:latest"
           name: product-service
           resources: {}
       restartPolicy: Always
