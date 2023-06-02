@@ -6,7 +6,7 @@ metadata:
   name: product-service
 
 container:
-  image: gayankod/product-service-2.0
+  image: gayankod/product-service-2.1
   tag: latest
   name: product-service
   port: 80
