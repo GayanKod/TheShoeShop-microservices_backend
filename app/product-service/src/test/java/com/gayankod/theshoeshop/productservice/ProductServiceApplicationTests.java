@@ -50,7 +50,7 @@ class ProductServiceApplicationTests {
 
 	private ProductRequest getProductRequest(){
 		return ProductRequest.builder()
-				.name("Test Product")
+				.title("Test Product")
 				.description("Test Description")
 				.price(BigDecimal.valueOf(1000))
 				.build();

@@ -19,10 +19,14 @@ public class ProductService {
 
     public void createProduct(ProductRequest productRequest){
         Product product = Product.builder()
-                .name(productRequest.getName())
+                .title(productRequest.getTitle())
+                .src(productRequest.getSrc())
                 .description(productRequest.getDescription())
-                .skuCode(productRequest.getSkuCode())
+                .content(productRequest.getContent())
                 .price(productRequest.getPrice())
+                .colors(productRequest.getColors())
+                .count(productRequest.getCount())
+                .skuCode(productRequest.getSkuCode())
                 .build();
 
         productRepository.save(product);
@@ -38,10 +42,14 @@ public class ProductService {
     private ProductResponse mapToProductResponse(Product product) {
         return ProductResponse.builder()
                 .id(product.getId())
-                .name(product.getName())
+                .title(product.getTitle())
+                .src(product.getSrc())
                 .description(product.getDescription())
-                .skuCode(product.getSkuCode())
+                .content(product.getContent())
                 .price(product.getPrice())
+                .colors(product.getColors())
+                .count(product.getCount())
+                .skuCode(product.getSkuCode())
                 .build();
 
     }
