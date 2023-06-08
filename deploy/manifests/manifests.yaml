@@ -881,3 +881,4 @@ spec:
       - "POST"
     accessControlAllowOriginList:
       - "*"
+    content-type: application/json
