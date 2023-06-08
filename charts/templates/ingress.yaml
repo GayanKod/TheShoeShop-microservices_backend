@@ -48,5 +48,6 @@ spec:
       - "POST"
     accessControlAllowOriginList:
       - "*"
-
+    accessControlAllowHeaders:
+      - "Content-Type"
 
