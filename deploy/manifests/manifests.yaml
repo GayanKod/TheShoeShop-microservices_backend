@@ -838,6 +838,10 @@ metadata:
     kubernetes.io/ingress.class: traefik
     traefik.ingress.kubernetes.io/router.middlewares: default-cors@kubernetescrd
 spec:
+  tls:
+    - hosts:
+        - theshoeshop.com
+      secretName: my-secret
   rules:
   - host: theshoeshop.com
     http:
